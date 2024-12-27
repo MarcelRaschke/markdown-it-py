@@ -41,15 +41,6 @@ trademark
 <p>™ ™</p>
 .
 
-
-paragraph
-.
-(p) (P)
-.
-<p>§ §</p>
-.
-
-
 plus-minus
 .
 +-5
@@ -81,6 +72,13 @@ dupes-ellipsis
 <p>!.. ?.. ,… !!!.. ???.. ,…</p>
 .
 
+copyright should be escapable
+.
+\(c)
+.
+<p>(c)</p>
+.
+
 
 dashes
 .
@@ -101,6 +99,16 @@ markdownit--awesome
 <p>markdownit–awesome</p>
 .
 
+dashes should be escapable
+.
+foo \-- bar
+
+foo -\- bar
+.
+<p>foo -- bar</p>
+<p>foo -- bar</p>
+.
+
 regression tests for #624
 .
 1---2---3
@@ -112,4 +120,11 @@ regression tests for #624
 <p>1—2—3</p>
 <p>1–2–3</p>
 <p>1 – – 3</p>
+.
+
+shouldn't replace entities
+.
+&#40;c) (c&#41; (c)
+.
+<p>(c) (c) ©</p>
 .

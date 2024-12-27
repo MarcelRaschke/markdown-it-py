@@ -3,7 +3,6 @@ from .state_core import StateCore
 
 
 def block(state: StateCore) -> None:
-
     if state.inlineMode:
         token = Token("inline", "", 0)
         token.content = state.src
@@ -11,6 +10,4 @@ def block(state: StateCore) -> None:
         token.children = []
         state.tokens.append(token)
     else:
-        state.md.block.parse(
-            state.src, state.md, state.env, state.tokens, state.srcCharCode
-        )
+        state.md.block.parse(state.src, state.md, state.env, state.tokens)

@@ -9,15 +9,15 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
-    - name: Set up Python 3.8
-      uses: actions/setup-python@v2
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v5
       with:
-        python-version: 3.8
+        python-version: 3.9
 
     - name: install pandoc
-      uses: r-lib/actions/setup-pandoc@v1
+      uses: r-lib/actions/setup-pandoc@v2
       with:
         pandoc-version: '2.6'
 
@@ -27,17 +27,17 @@ jobs:
         pip install tox
 
     - name: Run package benchmarks
-      run: tox -e py38-bench-packages -- --benchmark-min-rounds 20 --benchmark-json bench-packages.json
+      run: tox -e py39-bench-packages -- --benchmark-min-rounds 20 --benchmark-json bench-packages.json
 
     # - name: Upload package data
-    #   uses: actions/upload-artifact@v2
+    #   uses: actions/upload-artifact@v3
     #   with:
     #     name: bench-packages
     #     path: bench-packages.json
     #     if-no-files-found: error
 
     - name: Store benchmark result
-      uses: aiidateam/github-action-benchmark@v2
+      uses: aiidateam/github-action-benchmark@v3
       with:
         name: Parsing Benchmarks
         output-file-path: bench-packages.json

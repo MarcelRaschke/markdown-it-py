@@ -1,5 +1,108 @@
 # Change Log
 
+## 3.0.0 - 2023-06-03
+
+⚠️ This release contains some minor breaking changes in the internal API and improvements to the parsing strictness.
+
+**Full Changelog**: <https://github.com/executablebooks/markdown-it-py/compare/v2.2.0...v3.0.0>
+
+### ⬆️ UPGRADE: Drop support for Python 3.7
+
+Also add testing for Python 3.11
+
+### ⬆️ UPGRADE: Update from upstream markdown-it `12.2.0` to `13.0.0`
+
+A key change is the addition of a new `Token` type, `text_special`, which is used to represent HTML entities and backslash escaped characters.
+This ensures that (core) typographic transformation rules are not incorrectly applied to these texts.
+The final core rule is now the new `text_join` rule, which joins adjacent `text`/`text_special` tokens,
+and so no `text_special` tokens should be present in the final token stream.
+Any custom typographic rules should be inserted before `text_join`.
+
+A new `linkify` rule has also been added to the inline chain, which will linkify full URLs (e.g. `https://example.com`),
+and fixes collision of emphasis and linkifier (so `http://example.org/foo._bar_-_baz` is now a single link, not emphasized).
+Emails and fuzzy links are not affected by this.
+
+* ♻️ Refactor backslash escape logic, add `text_special` [#276](https://github.com/executablebooks/markdown-it-py/pull/276)
+* ♻️ Parse entities to `text_special` token [#280](https://github.com/executablebooks/markdown-it-py/pull/280)
+* ♻️ Refactor: Add linkifier rule to inline chain for full links [#279](https://github.com/executablebooks/markdown-it-py/pull/279)
+* ‼️ Remove `(p)` => `§` replacement in typographer [#281](https://github.com/executablebooks/markdown-it-py/pull/281)
+* ‼️ Remove unused `silent` arg in `ParserBlock.tokenize` [#284](https://github.com/executablebooks/markdown-it-py/pull/284)
+* 🐛 FIX: numeric character reference passing [#272](https://github.com/executablebooks/markdown-it-py/pull/272)
+* 🐛 Fix: tab preventing paragraph continuation in lists [#274](https://github.com/executablebooks/markdown-it-py/pull/274)
+* 👌 Improve nested emphasis parsing [#273](https://github.com/executablebooks/markdown-it-py/pull/273)
+* 👌 fix possible ReDOS in newline rule [#275](https://github.com/executablebooks/markdown-it-py/pull/275)
+* 👌 Improve performance of `skipSpaces`/`skipChars` [#271](https://github.com/executablebooks/markdown-it-py/pull/271)
+* 👌 Show text of `text_special` in `tree.pretty` [#282](https://github.com/executablebooks/markdown-it-py/pull/282)
+
+### ♻️ REFACTOR: Replace most character code use with strings
+
+The use of `StateBase.srcCharCode` is deprecated (with backward-compatibility), and all core uses are replaced by `StateBase.src`.
+
+Conversion of source string characters to an integer representing the Unicode character is prevalent in the upstream JavaScript implementation, to improve performance.
+However, it is unnecessary in Python and leads to harder to read code and performance deprecations (during the conversion in the `StateBase` initialisation).
+
+See [#270](https://github.com/executablebooks/markdown-it-py/pull/270), thanks to [@hukkinj1](https://github.com/hukkinj1).
+
+### ♻️ Centralise indented code block tests
+
+For CommonMark, the presence of indented code blocks prevent any other block element from having an indent of greater than 4 spaces.
+Certain Markdown flavors and derivatives, such as mdx and djot, disable these code blocks though, since it is more common to use code fences and/or arbitrary indenting is desirable.
+Previously, disabling code blocks did not remove the indent limitation, since most block elements had the 3 space limitation hard-coded.
+This change centralised the logic of applying this limitation (in `StateBlock.is_code_block`), and only applies it when indented code blocks are enabled.
+
+This allows for e.g.
+
+```md
+<div>
+  <div>
+
+    I can indent as much as I want here.
+
+  <div>
+<div>
+```
+
+See [#260](https://github.com/executablebooks/markdown-it-py/pull/260)
+
+### 🔧 Maintenance changes
+
+Strict type annotation checking has been applied to the whole code base,
+[ruff](https://github.com/charliermarsh/ruff) is now used for linting,
+and fuzzing tests have been added to the CI, to integrate with Google [OSS-Fuzz](https://github.com/google/oss-fuzz/tree/master/projects/markdown-it-py) testing, thanks to [@DavidKorczynski](https://github.com/DavidKorczynski).
+
+* 🔧 MAINTAIN: Make type checking strict [#](https://github.com/executablebooks/markdown-it-py/pull/267)
+* 🔧 Add typing of rule functions [#283](https://github.com/executablebooks/markdown-it-py/pull/283)
+* 🔧 Move linting from flake8 to ruff [#268](https://github.com/executablebooks/markdown-it-py/pull/268)
+* 🧪 CI: Add fuzzing workflow for PRs [#262](https://github.com/executablebooks/markdown-it-py/pull/262)
+* 🔧 Add tox env for fuzz testcase run [#263](https://github.com/executablebooks/markdown-it-py/pull/263)
+* 🧪 Add OSS-Fuzz set up by @DavidKorczynski in [#255](https://github.com/executablebooks/markdown-it-py/pull/255)
+* 🧪 Fix fuzzing test failures [#254](https://github.com/executablebooks/markdown-it-py/pull/254)
+
+## 2.2.0 - 2023-02-22
+
+### What's Changed
+
+* ⬆️ UPGRADE: Allow linkify-it-py v2 by @hukkin in [#218](https://github.com/executablebooks/markdown-it-py/pull/218)
+* 🐛 FIX: CVE-2023-26303 by @chrisjsewell in [#246](https://github.com/executablebooks/markdown-it-py/pull/246)
+* 🐛 FIX: CLI crash on non-utf8 character by @chrisjsewell in [#247](https://github.com/executablebooks/markdown-it-py/pull/247)
+* 📚 DOCS: Update the example by @redstoneleo in [#229](https://github.com/executablebooks/markdown-it-py/pull/229)
+* 📚 DOCS: Add section about markdown renderer by @holamgadol in [#227](https://github.com/executablebooks/markdown-it-py/pull/227)
+* 🔧 Create SECURITY.md by @chrisjsewell in [#248](https://github.com/executablebooks/markdown-it-py/pull/248)
+* 🔧 MAINTAIN: Update mypy's additional dependencies by @hukkin in [#217](https://github.com/executablebooks/markdown-it-py/pull/217)
+* Fix typo by @jwilk in [#230](https://github.com/executablebooks/markdown-it-py/pull/230)
+* 🔧 Bump GH actions by @chrisjsewell in [#244](https://github.com/executablebooks/markdown-it-py/pull/244)
+* 🔧 Update benchmark pkg versions by @chrisjsewell in [#245](https://github.com/executablebooks/markdown-it-py/pull/245)
+
+### New Contributors
+
+Thanks to 🎉
+
+* @jwilk made their first contribution in [#230](https://github.com/executablebooks/markdown-it-py/pull/230)
+* @holamgadol made their first contribution in [#227](https://github.com/executablebooks/markdown-it-py/pull/227)
+* @redstoneleo made their first contribution in [#229](https://github.com/executablebooks/markdown-it-py/pull/229)
+
+**Full Changelog**: <https://github.com/executablebooks/markdown-it-py/compare/v2.1.0...v2.2.0>
+
 ## 2.1.0 - 2022-04-15
 
 This release is primarily to replace the `attrs` package dependency,

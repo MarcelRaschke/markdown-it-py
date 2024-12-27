@@ -4,8 +4,11 @@
 [![Coverage Status][codecov-badge]][codecov-link]
 [![PyPI][pypi-badge]][pypi-link]
 [![Conda][conda-badge]][conda-link]
-[![Code style: black][black-badge]][black-link]
 [![PyPI - Downloads][install-badge]][install-link]
+
+<p align="center">
+  <img alt="markdown-it-py icon" src="https://raw.githubusercontent.com/executablebooks/markdown-it-py/master/docs/_static/markdown-it-py.svg">
+</p>
 
 > Markdown parser done right.
 
@@ -13,7 +16,8 @@
 - Configurable syntax: you can add new rules and even replace existing ones.
 - Pluggable: Adds syntax extensions to extend the parser (see the [plugin list][md-plugins]).
 - High speed (see our [benchmarking tests][md-performance])
-- [Safe by default][md-security]
+- Easy to configure for [security][md-security]
+- Member of [Google's Assured Open Source Software](https://cloud.google.com/assured-open-source-software/docs/supported-packages)
 
 This is a Python port of [markdown-it], and some of its associated plugins.
 For more details see: <https://markdown-it-py.readthedocs.io>.
@@ -23,13 +27,12 @@ For details on [markdown-it] itself, see:
 - The __[Live demo](https://markdown-it.github.io)__
 - [The markdown-it README][markdown-it-readme]
 
+**See also:** [markdown-it-pyrs](https://github.com/chrisjsewell/markdown-it-pyrs) for an experimental Rust binding,
+for even more speed!
+
 ## Installation
 
-```bash
-conda install -c conda-forge markdown-it-py
-```
-
-or
+### PIP
 
 ```bash
 pip install markdown-it-py[plugins]
@@ -38,8 +41,19 @@ pip install markdown-it-py[plugins]
 or with extras
 
 ```bash
-conda install -c conda-forge markdown-it-py linkify-it-py mdit-py-plugins
 pip install markdown-it-py[linkify,plugins]
+```
+
+### Conda
+
+```bash
+conda install -c conda-forge markdown-it-py
+```
+
+or with extras
+
+```bash
+conda install -c conda-forge markdown-it-py linkify-it-py mdit-py-plugins
 ```
 
 ## Usage
@@ -55,10 +69,9 @@ from mdit_py_plugins.front_matter import front_matter_plugin
 from mdit_py_plugins.footnote import footnote_plugin
 
 md = (
-    MarkdownIt()
+    MarkdownIt('commonmark', {'breaks':True,'html':True})
     .use(front_matter_plugin)
     .use(footnote_plugin)
-    .disable('image')
     .enable('table')
 )
 text = ("""
@@ -127,7 +140,7 @@ Big thanks to the authors of [markdown-it]:
 
 Also [John MacFarlane](https://github.com/jgm) for his work on the CommonMark spec and reference implementations.
 
-[github-ci]: https://github.com/executablebooks/markdown-it-py/workflows/Python%20package/badge.svg?branch=master
+[github-ci]: https://github.com/executablebooks/markdown-it-py/actions/workflows/tests.yml/badge.svg?branch=master
 [github-link]: https://github.com/executablebooks/markdown-it-py
 [pypi-badge]: https://img.shields.io/pypi/v/markdown-it-py.svg
 [pypi-link]: https://pypi.org/project/markdown-it-py
@@ -135,14 +148,12 @@ Also [John MacFarlane](https://github.com/jgm) for his work on the CommonMark sp
 [conda-link]: https://anaconda.org/conda-forge/markdown-it-py
 [codecov-badge]: https://codecov.io/gh/executablebooks/markdown-it-py/branch/master/graph/badge.svg
 [codecov-link]: https://codecov.io/gh/executablebooks/markdown-it-py
-[black-badge]: https://img.shields.io/badge/code%20style-black-000000.svg
-[black-link]: https://github.com/ambv/black
 [install-badge]: https://img.shields.io/pypi/dw/markdown-it-py?label=pypi%20installs
 [install-link]: https://pypistats.org/packages/markdown-it-py
 
 [CommonMark spec]: http://spec.commonmark.org/
 [markdown-it]: https://github.com/markdown-it/markdown-it
 [markdown-it-readme]: https://github.com/markdown-it/markdown-it/blob/master/README.md
-[md-security]: https://markdown-it-py.readthedocs.io/en/latest/other.html
-[md-performance]: https://markdown-it-py.readthedocs.io/en/latest/other.html
+[md-security]: https://markdown-it-py.readthedocs.io/en/latest/security.html
+[md-performance]: https://markdown-it-py.readthedocs.io/en/latest/performance.html
 [md-plugins]: https://markdown-it-py.readthedocs.io/en/latest/plugins.html

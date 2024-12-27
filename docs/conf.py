@@ -36,6 +36,7 @@ extensions = [
     "myst_parser",
     "sphinx_copybutton",
     "sphinx_design",
+    "jupyter_sphinx",
 ]
 
 # List of patterns, relative to source directory, that match files and
@@ -44,18 +45,19 @@ extensions = [
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 nitpicky = True
-nitpick_ignore = [
-    ("py:class", "Match"),
-    ("py:class", "Path"),
-    ("py:class", "x in the interval [0, 1)."),
-    ("py:class", "markdown_it.helpers.parse_link_destination._Result"),
-    ("py:class", "markdown_it.helpers.parse_link_title._Result"),
-    ("py:class", "MarkdownIt"),
-    ("py:class", "RuleFunc"),
-    ("py:class", "_NodeType"),
-    ("py:class", "typing_extensions.Protocol"),
+nitpick_ignore_regex = [
+    ("py:.*", name)
+    for name in (
+        ".*_ItemTV",
+        ".*_NodeType",
+        ".*Literal.*",
+        ".*_Result",
+        "EnvType",
+        "Path",
+        "Ellipsis",
+        "NotRequired",
+    )
 ]
-
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -63,8 +65,11 @@ nitpick_ignore = [
 # a list of builtin themes.
 #
 html_title = "markdown-it-py"
+html_logo = html_favicon = "_static/markdown-it-py.svg"
 html_theme = "sphinx_book_theme"
 html_theme_options = {
+    "home_page_in_toc": True,
+    "use_repository_button": True,
     "use_edit_page_button": True,
     "repository_url": "https://github.com/executablebooks/markdown-it-py",
     "repository_branch": "master",
@@ -80,7 +85,7 @@ html_css_files = ["custom.css"]
 
 
 intersphinx_mapping = {
-    "python": ("https://docs.python.org/3.7", None),
+    "python": ("https://docs.python.org/3.9", None),
     "mdit-py-plugins": ("https://mdit-py-plugins.readthedocs.io/en/latest/", None),
 }
 
@@ -102,7 +107,7 @@ def run_apidoc(app):
     this_folder = os.path.abspath(os.path.dirname(os.path.realpath(__file__)))
     api_folder = os.path.join(this_folder, "api")
     module_path = os.path.normpath(os.path.join(this_folder, "../"))
-    ignore_paths = ["../profiler.py", "../conftest.py", "../tests", "../benchmarking"]
+    ignore_paths = ["../scripts", "../conftest.py", "../tests", "../benchmarking"]
     ignore_paths = [
         os.path.normpath(os.path.join(this_folder, p)) for p in ignore_paths
     ]
@@ -120,7 +125,7 @@ def run_apidoc(app):
         shutil.rmtree(api_folder)
     os.mkdir(api_folder)
 
-    argv = ["-M", "--separate", "-o", api_folder, module_path] + ignore_paths
+    argv = ["-M", "--separate", "-o", api_folder, module_path, *ignore_paths]
 
     apidoc.OPTIONS.append("ignore-module-all")
     apidoc.main(argv)
@@ -134,17 +139,3 @@ def setup(app):
     """Add functions to the Sphinx setup."""
     if os.environ.get("SKIP_APIDOC", None) is None:
         app.connect("builder-inited", run_apidoc)
-
-    from sphinx.directives.code import CodeBlock
-
-    class CodeCell(CodeBlock):
-        """Custom code block directive."""
-
-        def run(self):
-            """Run the directive."""
-            self.options["class"] = ["code-cell"]
-            return super().run()
-
-    # note, these could be run by myst-nb,
-    # but currently this causes a circular dependency issue
-    app.add_directive("code-cell", CodeCell)
