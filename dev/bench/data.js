@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754732409156,
+  "lastUpdate": 1754754343822,
   "repoUrl": "https://github.com/MarcelRaschke/markdown-it-py",
   "xAxis": "id",
   "oneChartGroups": [
@@ -21151,6 +21151,92 @@ window.BENCHMARK_DATA = {
             "range": "stddev: 0.013382",
             "group": "packages",
             "extra": "mean: 726.68 msec\nrounds: 20"
+          }
+        ]
+      },
+      {
+        "cpu": {
+          "speed": "0.00",
+          "cores": 4,
+          "physicalCores": 2,
+          "processors": 1
+        },
+        "extra": {
+          "pythonVersion": "3.10.18"
+        },
+        "commit": {
+          "id": "e4009641db528444b85d384af815e9cad997a016",
+          "message": "👌 limit the number of autocompleted cells in a table (#364)\n\nImplements: https://github.com/markdown-it/markdown-it/commit/00b8a93c8fe60d66e862445082b61d1ce1abae1c",
+          "timestamp": "2025-08-08T19:11:12+02:00",
+          "url": "https://github.com/MarcelRaschke/markdown-it-py/commit/e4009641db528444b85d384af815e9cad997a016",
+          "distinct": true,
+          "tree_id": "603a9f95701bab2a7a9fe2939c68a956cff993bf"
+        },
+        "date": 1754754342603,
+        "benches": [
+          {
+            "name": "benchmarking/bench_packages.py::test_markdown_it_py",
+            "value": 7.908429853434054,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0035692",
+            "group": "packages",
+            "extra": "mean: 126.45 msec\nrounds: 20"
+          },
+          {
+            "name": "benchmarking/bench_packages.py::test_markdown_it_pyrs",
+            "value": 196.7028099060205,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000033476",
+            "group": "packages",
+            "extra": "mean: 5.0838 msec\nrounds: 125"
+          },
+          {
+            "name": "benchmarking/bench_packages.py::test_mistune",
+            "value": 9.849424136206423,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0025074",
+            "group": "packages",
+            "extra": "mean: 101.53 msec\nrounds: 20"
+          },
+          {
+            "name": "benchmarking/bench_packages.py::test_commonmark_py",
+            "value": 3.244619266981819,
+            "unit": "iter/sec",
+            "range": "stddev: 0.014652",
+            "group": "packages",
+            "extra": "mean: 308.20 msec\nrounds: 20"
+          },
+          {
+            "name": "benchmarking/bench_packages.py::test_pymarkdown",
+            "value": 7.643574291114426,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0060886",
+            "group": "packages",
+            "extra": "mean: 130.83 msec\nrounds: 20"
+          },
+          {
+            "name": "benchmarking/bench_packages.py::test_pymarkdown_extra",
+            "value": 5.406487852950234,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0037808",
+            "group": "packages",
+            "extra": "mean: 184.96 msec\nrounds: 20"
+          },
+          {
+            "name": "benchmarking/bench_packages.py::test_mistletoe",
+            "value": 7.1699434427896795,
+            "unit": "iter/sec",
+            "range": "stddev: 0.015617",
+            "group": "packages",
+            "extra": "mean: 139.47 msec\nrounds: 20"
+          },
+          {
+            "name": "benchmarking/bench_packages.py::test_panflute",
+            "value": 1.4203341876670557,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0082124",
+            "group": "packages",
+            "extra": "mean: 704.06 msec\nrounds: 20"
           }
         ]
       }
