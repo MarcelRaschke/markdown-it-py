@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754932830920,
+  "lastUpdate": 1766592575414,
   "repoUrl": "https://github.com/MarcelRaschke/markdown-it-py",
   "xAxis": "id",
   "oneChartGroups": [
@@ -21495,6 +21495,92 @@ window.BENCHMARK_DATA = {
             "range": "stddev: 0.013725",
             "group": "packages",
             "extra": "mean: 707.62 msec\nrounds: 20"
+          }
+        ]
+      },
+      {
+        "cpu": {
+          "speed": "0.00",
+          "cores": 4,
+          "physicalCores": 2,
+          "processors": 1
+        },
+        "extra": {
+          "pythonVersion": "3.10.19"
+        },
+        "commit": {
+          "id": "49043e4445d233598fb893bed6949f7b25ae4e27",
+          "message": "Add --stdin option to CLI for reading Markdown from standard input (#379)\n\n- Add --stdin flag to parse_args for reading from stdin\n- Add convert_stdin() function to handle stdin parsing\n- Update main() to call convert_stdin() when --stdin flag is used\n- Add comprehensive tests for stdin functionality and CLI behavior\n\nSigned-off-by: Matěj Cepl <mcepl@cepl.eu>",
+          "timestamp": "2025-12-24T12:44:37+01:00",
+          "url": "https://github.com/MarcelRaschke/markdown-it-py/commit/49043e4445d233598fb893bed6949f7b25ae4e27",
+          "distinct": true,
+          "tree_id": "890ef1a12f0b73c350211672c2f8354187d4a6be"
+        },
+        "date": 1766592574147,
+        "benches": [
+          {
+            "name": "benchmarking/bench_packages.py::test_markdown_it_py",
+            "value": 7.827806967693926,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0065239",
+            "group": "packages",
+            "extra": "mean: 127.75 msec\nrounds: 20"
+          },
+          {
+            "name": "benchmarking/bench_packages.py::test_markdown_it_pyrs",
+            "value": 198.0055074497371,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00011046",
+            "group": "packages",
+            "extra": "mean: 5.0504 msec\nrounds: 124"
+          },
+          {
+            "name": "benchmarking/bench_packages.py::test_mistune",
+            "value": 9.96177580950602,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0029396",
+            "group": "packages",
+            "extra": "mean: 100.38 msec\nrounds: 20"
+          },
+          {
+            "name": "benchmarking/bench_packages.py::test_commonmark_py",
+            "value": 2.976554502604987,
+            "unit": "iter/sec",
+            "range": "stddev: 0.014009",
+            "group": "packages",
+            "extra": "mean: 335.96 msec\nrounds: 20"
+          },
+          {
+            "name": "benchmarking/bench_packages.py::test_pymarkdown",
+            "value": 7.5058283573452504,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0054638",
+            "group": "packages",
+            "extra": "mean: 133.23 msec\nrounds: 20"
+          },
+          {
+            "name": "benchmarking/bench_packages.py::test_pymarkdown_extra",
+            "value": 5.590470622420689,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0031545",
+            "group": "packages",
+            "extra": "mean: 178.88 msec\nrounds: 20"
+          },
+          {
+            "name": "benchmarking/bench_packages.py::test_mistletoe",
+            "value": 7.505425661890993,
+            "unit": "iter/sec",
+            "range": "stddev: 0.012094",
+            "group": "packages",
+            "extra": "mean: 133.24 msec\nrounds: 20"
+          },
+          {
+            "name": "benchmarking/bench_packages.py::test_panflute",
+            "value": 1.4432417461884763,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0051431",
+            "group": "packages",
+            "extra": "mean: 692.88 msec\nrounds: 20"
           }
         ]
       }
