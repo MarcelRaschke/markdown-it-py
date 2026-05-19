@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1778250954371,
+  "lastUpdate": 1779227272420,
   "repoUrl": "https://github.com/MarcelRaschke/markdown-it-py",
   "xAxis": "id",
   "oneChartGroups": [
@@ -21925,6 +21925,92 @@ window.BENCHMARK_DATA = {
             "range": "stddev: 0.0089890",
             "group": "packages",
             "extra": "mean: 711.05 msec\nrounds: 20"
+          }
+        ]
+      },
+      {
+        "cpu": {
+          "speed": "0.00",
+          "cores": 4,
+          "physicalCores": 2,
+          "processors": 1
+        },
+        "extra": {
+          "pythonVersion": "3.10.20"
+        },
+        "commit": {
+          "id": "2c3f71ec46c4259ca375fb40c9cd47385c6c304e",
+          "message": "🔧 Switch PyPI publishing to trusted publishing (OIDC) (#397)\n\nReplace long-lived API token with PyPI trusted publishing via\npypa/gh-action-pypi-publish. This uses short-lived OIDC credentials\nscoped to the CI workflow, eliminating the need for stored secrets.",
+          "timestamp": "2026-05-19T13:26:54+02:00",
+          "url": "https://github.com/MarcelRaschke/markdown-it-py/commit/2c3f71ec46c4259ca375fb40c9cd47385c6c304e",
+          "distinct": true,
+          "tree_id": "a35eef67411c77c51397ed6366b73e5e004189b1"
+        },
+        "date": 1779227271096,
+        "benches": [
+          {
+            "name": "benchmarking/bench_packages.py::test_markdown_it_py",
+            "value": 7.746986282019001,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0036365",
+            "group": "packages",
+            "extra": "mean: 129.08 msec\nrounds: 20"
+          },
+          {
+            "name": "benchmarking/bench_packages.py::test_markdown_it_pyrs",
+            "value": 196.1895566874681,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000081856",
+            "group": "packages",
+            "extra": "mean: 5.0971 msec\nrounds: 127"
+          },
+          {
+            "name": "benchmarking/bench_packages.py::test_mistune",
+            "value": 10.094310471463208,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0022961",
+            "group": "packages",
+            "extra": "mean: 99.066 msec\nrounds: 20"
+          },
+          {
+            "name": "benchmarking/bench_packages.py::test_commonmark_py",
+            "value": 3.0226786855821075,
+            "unit": "iter/sec",
+            "range": "stddev: 0.013864",
+            "group": "packages",
+            "extra": "mean: 330.83 msec\nrounds: 20"
+          },
+          {
+            "name": "benchmarking/bench_packages.py::test_pymarkdown",
+            "value": 7.41459946178559,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0055970",
+            "group": "packages",
+            "extra": "mean: 134.87 msec\nrounds: 20"
+          },
+          {
+            "name": "benchmarking/bench_packages.py::test_pymarkdown_extra",
+            "value": 5.571214836825268,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0033912",
+            "group": "packages",
+            "extra": "mean: 179.49 msec\nrounds: 20"
+          },
+          {
+            "name": "benchmarking/bench_packages.py::test_mistletoe",
+            "value": 7.449462087491027,
+            "unit": "iter/sec",
+            "range": "stddev: 0.014214",
+            "group": "packages",
+            "extra": "mean: 134.24 msec\nrounds: 20"
+          },
+          {
+            "name": "benchmarking/bench_packages.py::test_panflute",
+            "value": 1.4139949154556948,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0069272",
+            "group": "packages",
+            "extra": "mean: 707.22 msec\nrounds: 20"
           }
         ]
       }
